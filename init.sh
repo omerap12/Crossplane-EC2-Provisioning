@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ $# -ne 0 ]; then
+function print_usage {
   echo "Usage: ./init.sh"
   echo "This script installs Crossplane and the AWS Provider."
   echo "It requires the following environment variables to be set:"
@@ -10,8 +10,7 @@ if [ $# -ne 0 ]; then
   echo "It also requires the following tools to be installed:"
   echo "  - kubectl"
   echo "  - helm"
-  exit 1
-fi
+}
 
 if [ -z "$AWS_ACCESS_KEY_ID" ] || [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
   echo "AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY must be set."
@@ -51,6 +50,10 @@ function aws_provider {
   kubectl get providers.aws.crossplane.io -n crossplane-system
 }
 
+if [ $# -ne 0 ]; then
+  print_usage
+  exit 1
+fi
 
 echo "Installing Crossplane..."
 install_crossplane
