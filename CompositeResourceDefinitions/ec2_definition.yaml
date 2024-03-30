@@ -33,5 +33,5 @@ spec:
                     default: cheap
                   operatingSystem:
                     type: string
-                    description: "Can be linux(AL), windows or bottleRocket" 
+                    description: "Can be linux(AL), windows or ubuntu" 
                     default: linux
