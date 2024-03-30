@@ -31,7 +31,7 @@ spec:
                     type: string
                     description: "The type of the EC2 instance - can be cheap, memory, cpu, gpu or storage optimized"
                     default: cheap
-                  subnetlocation:
+                  operatingSystem:
                     type: string
-                    description: "Can be public or private"
-                    default: private
+                    description: "Can be linux(AL), windows or bottleRocket" 
+                    default: linux
