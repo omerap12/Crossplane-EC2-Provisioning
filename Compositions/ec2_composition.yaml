@@ -56,3 +56,4 @@ spec:
         name: ec2-instance
         spec:
           forProvider:
+            region: us-east-1
