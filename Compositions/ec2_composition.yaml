@@ -40,9 +40,9 @@ spec:
       patches:
         - fromFieldPath: spec.parameters.subnetId
           toFieldPath: spec.forProvider.subnetId
-    - name: associatePublicIpAddress
+    - name: publicIp
       patches:
-        - fromFieldPath: spec.parameters.associatePublicIpAddress
+        - fromFieldPath: spec.parameters.publicIp
           toFieldPath: spec.forProvider.associatePublicIpAddress
   resources:
     - name: ec2-instance
