@@ -1,0 +1,58 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: ec2-composition
+  labels:
+    provider: aws
+    region: us-east-1
+spec:
+  compositeTypeRef:
+    apiVersion: omerap12.com/v1alpha1
+    kind: EC2
+  patchSets:
+    - name: instanceType
+      patches:
+       - fromFieldPath: spec.parameters.ec2type
+         toFieldPath: spec.forProvider.instanceType
+         transforms:
+            - type: map
+              map:
+                cheap: t2.micro
+                memory: r5.large
+                cpu: c5.large
+                gpu: p2.xlarge
+                storage: i3.large
+    - name: operatingSystem
+      patches:
+        - fromFieldPath: spec.parameters.operatingSystem
+          toFieldPath: spec.forProvider.ami
+          transforms:
+            - type: map
+              map:
+                linux: ami-0c101f26f147fa7fd
+                windows: ami-03cd80cfebcbb4481
+                ubuntu: ami-080e1f13689e07408
+    - name: region
+      patches:
+        - fromFieldPath: spec.parameters.region
+          toFieldPath: spec.forProvider.region
+    - name: subnetId
+      patches:
+        - fromFieldPath: spec.parameters.subnetId
+          toFieldPath: spec.forProvider.subnetId
+    - name: associatePublicIpAddress
+      patches:
+        - fromFieldPath: spec.parameters.associatePublicIpAddress
+          toFieldPath: spec.forProvider.associatePublicIpAddress
+  resources:
+    - name: ec2-instance
+      base:
+        apiVersion: ec2.aws.upbound.io/v1beta1
+        kind: Instance
+        metadata:
+        labels:
+          creator: crossplane
+          author: omerap12
+        name: ec2-instance
+        spec:
+          forProvider:
