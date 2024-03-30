@@ -1,0 +1,37 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: ec2s.omerap12.com
+spec:
+  group: omerap12.com
+  names:
+    kind: EC2
+    plural: ec2s
+  claimNames:
+    kind: EC2Claim
+    plural: ec2claims
+  versions:
+  - name: v1alpha1
+    served: true
+    referenceable: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              instanceid:
+                type: string
+                description: "The instance ID of the EC2 instance"
+              parameters:
+                type: object
+                properties:
+                  ec2type:
+                    type: string
+                    description: "The type of the EC2 instance - can be cheap, memory, cpu, gpu or storage optimized"
+                    default: cheap
+                  subnetlocation:
+                    type: string
+                    description: "Can be public or private"
+                    default: private
