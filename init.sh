@@ -12,16 +12,6 @@ function print_usage {
   echo "  - helm"
 }
 
-if [ -z "$AWS_ACCESS_KEY_ID" ] || [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
-  echo "AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY must be set."
-  exit 1
-fi
-
-if [ -z "$KUBECONFIG" ]; then
-  echo "KUBECONFIG must be set."
-  exit 1
-fi
-
 function install_crossplane {
   # Crossplane Helm Chart repository
   helm repo add crossplane-stable https://charts.crossplane.io/stable 
@@ -54,6 +44,17 @@ if [ $# -ne 0 ]; then
   print_usage
   exit 1
 fi
+
+if [ -z "$AWS_ACCESS_KEY_ID" ] || [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
+  echo "AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY must be set."
+  exit 1
+fi
+
+if [ -z "$KUBECONFIG" ]; then
+  echo "KUBECONFIG must be set."
+  exit 1
+fi
+
 
 echo "Installing Crossplane..."
 install_crossplane
