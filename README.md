@@ -16,7 +16,7 @@ The project consists of several components:
 
 Before running the initialization script, ensure the following:
 
-- AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables are set.
+- File aws-credentials.txt is filled with the right AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY.
 - KUBECONFIG environment variable is set.
 - kubectl and helm are installed.
 

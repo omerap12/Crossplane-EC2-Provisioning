@@ -35,7 +35,7 @@ spec:
                   subnetId:
                     type: string
                     description: "The subnet in which the EC2 instance will be created"
-                  associatePublicIpAddress: 
+                  publicIp:
                     type: boolean
                     description: "Whether the EC2 instance should have a public IP address"
                     default: false
