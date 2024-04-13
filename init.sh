@@ -3,9 +3,7 @@
 function print_usage {
   echo "Usage: ./init.sh"
   echo "This script installs Crossplane and the AWS Provider."
-  echo "It requires the following environment variables to be set:"
-  echo "  - AWS_ACCESS_KEY_ID"
-  echo "  - AWS_SECRET_ACCESS_KEY"
+  echo "It requires the following environment variable to be set:"
   echo "  - KUBECONFIG"
   echo "It also requires the following tools to be installed:"
   echo "  - kubectl"
@@ -32,19 +30,14 @@ function install_crossplane {
 
 
 function aws_provider {
-  # Create a secret with AWS credentials.
-  kubectl create secret generic aws-creds -n crossplane-system --from-literal=aws_access_key_id=${AWS_ACCESS_KEY_ID} --from-literal=aws_secret_access_key=${AWS_SECRET_ACCESS_KEY}
   # Create the AWS Provider.
-  kubectl apply -f Providers/provider-aws-ec2.yaml
+  kubectl apply -f Providers/
+  helm install crossplane crossplane-stable/crossplane --namespace crossplane-system --create-namespace --set provider.packages='{xpkg.upbound.io/crossplane-contrib/provider-aws:v0.39.0}'
+
 }
 
 if [ $# -ne 0 ]; then
   print_usage
-  exit 1
-fi
-
-if [ -z "$AWS_ACCESS_KEY_ID" ] || [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
-  echo "AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY must be set."
   exit 1
 fi
 

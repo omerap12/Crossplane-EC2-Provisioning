@@ -12,4 +12,3 @@ spec:
   parameters:
     ec2type: cheap
     operatingSystem: linux
-    region: us-east-1
