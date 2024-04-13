@@ -35,9 +35,7 @@ function aws_provider {
   # Create a secret with AWS credentials.
   kubectl create secret generic aws-creds -n crossplane-system --from-literal=aws_access_key_id=${AWS_ACCESS_KEY_ID} --from-literal=aws_secret_access_key=${AWS_SECRET_ACCESS_KEY}
   # Create the AWS Provider.
-  kubectl apply -f Providers/aws-provider.yaml
-  # Check the status of the provider.
-  kubectl get providers.aws.crossplane.io -n crossplane-system
+  kubectl apply -f Providers/provider-aws-ec2.yaml
 }
 
 if [ $# -ne 0 ]; then
@@ -58,5 +56,7 @@ fi
 
 echo "Installing Crossplane..."
 install_crossplane
+echo
 echo "Installing AWS Provider..."
+sleep 10
 aws_provider
