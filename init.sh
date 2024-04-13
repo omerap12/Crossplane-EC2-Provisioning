@@ -30,6 +30,8 @@ function install_crossplane {
 
 
 function aws_provider {
+  # Apply AWS Credentials Secret.
+  kubectl create secret generic aws-secret -n crossplane-system --from-file=creds=./aws-credentials.txt
   # Create the AWS Provider.
   kubectl apply -f Providers/
   helm install crossplane crossplane-stable/crossplane --namespace crossplane-system --create-namespace --set provider.packages='{xpkg.upbound.io/crossplane-contrib/provider-aws:v0.39.0}'
