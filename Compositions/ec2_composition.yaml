@@ -18,7 +18,13 @@ spec:
         spec:
           forProvider:
             region: us-east-1
+            tags:
+              ManagedBy: Crossplane
       patches:
+      
+      - fromFieldPath: metadata.name
+        toFieldPath: spec.forProvider.tags.Name
+
       - fromFieldPath: spec.parameters.ec2type
         toFieldPath: spec.forProvider.instanceType
         transforms:
