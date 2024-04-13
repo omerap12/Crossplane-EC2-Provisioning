@@ -12,3 +12,5 @@ spec:
   parameters:
     ec2type: cheap
     operatingSystem: linux
+    subnetId: subnet-0c809b17b475f4b79
+    publicIp: false
