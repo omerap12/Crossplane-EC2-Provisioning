@@ -40,7 +40,7 @@ Once the initialization is complete, you can create EC2 instances by applying th
 apiVersion: omerap12.com/v1alpha1
 kind: EC2
 metadata:
-  name: example-ec2 # Name of the resource 
+  name: ec2-light # Resource name
   annotations:
     creator: crossplane
     author: omerap12
@@ -49,10 +49,9 @@ spec:
     matchLabels:
       provider: aws
   parameters:
-    ec2type: cheap # cheap/memory/cpu/gpu/storage optimized (default is cheap)
-    operatingSystem: linux # Can be linux(AL), windows or ubuntu (default is linux)
-    region: us-east-1
-    subnetId: xxx # Need to specify subnet id
-    publicIp: no # can be true
+    ec2type: cheap # cheap/memory/cpu/gpu/storage optimized (default cheap)
+    operatingSystem: # linux linux(AL),Windows, Ubuntu (default AL2)
+    subnetId: xxx # Must specify subnet id 
+    publicIp: false # true/false (deafult false)
 ```
 A new instance will be created and be managed by crossplane.
