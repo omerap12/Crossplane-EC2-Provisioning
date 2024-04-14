@@ -50,8 +50,22 @@ spec:
       provider: aws
   parameters:
     ec2type: cheap # cheap/memory/cpu/gpu/storage optimized (default cheap)
-    operatingSystem: # linux linux(AL),Windows, Ubuntu (default AL2)
+    operatingSystem: linux # linux(AL),Windows, Ubuntu (default AL2)
     subnetId: xxx # Must specify subnet id 
     publicIp: false # true/false (deafult false)
 ```
 A new instance will be created and be managed by crossplane.
+
+## Mapping
+
+### ec2type
+- cheap: t2.micro
+- memory: r5.large
+- cpu: c5.large
+- gpu: p3.xlarge
+- storage: i3.large
+
+### operatingSystem
+- linux: ami-0c101f26f147fa7fd
+- windows: ami-03cd80cfebcbb4481
+- ubuntu: ami-080e1f13689e07408
